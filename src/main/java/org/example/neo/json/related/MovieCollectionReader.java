@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MovieCollectionReader {
 
@@ -15,6 +16,8 @@ public class MovieCollectionReader {
         File file = new File("C:\\Users\\pmano\\OneDrive\\Desktop\\video.movies.json");
         ObjectMapper objectMapper = new ObjectMapper();
         List<Movie> bookMark = objectMapper.readValue(file, new TypeReference<>() {});
-        System.out.println(bookMark);
+        System.out.println(bookMark.size());
+        List<String> titles = bookMark.stream().map(Movie::getTitle).filter(x->x.contains("Kill")).collect(Collectors.toList());
+        System.out.println(titles);
     }
 }
